@@ -1,0 +1,16 @@
+# Tools
+.cache/
+.PVS-Studio/
+.vs/
+.idea/
+.run/
+.venv/
+
+*PVS-Studio*
+
+# Build folders
+build/
+out/
+
+# CMake user presets
+CMakeUserPresets.json

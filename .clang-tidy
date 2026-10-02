@@ -1,0 +1,96 @@
+Checks: >
+  -*,
+
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-switch-missing-default-case,
+  -bugprone-implicit-widening-of-multiplication-result,
+  -bugprone-exception-escape,
+
+  performance-*,
+  -performance-avoid-endl,
+  -performance-no-int-to-ptr,
+
+  portability-*,
+  -portability-avoid-pragma-once,
+
+  modernize-use-emplace,
+  modernize-use-equals-default,
+  modernize-use-override,
+  modernize-use-using,
+  modernize-use-nullptr,
+  modernize-make-shared,
+  modernize-make-unique,
+  modernize-deprecated-headers,
+  modernize-concat-nested-namespaces,
+
+  readability-redundant-*,
+  readability-delete-null-pointer,
+  readability-container-size-empty,
+  readability-simplify-boolean-expr,
+  readability-string-compare,
+  readability-identifier-naming,
+  readability-make-member-function-const,
+  readability-convert-member-functions-to-static,
+  readability-inconsistent-declaration-parameter-name,
+
+  clang-analyzer-*,
+  -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling
+
+CheckOptions:
+  - key: bugprone-multi-level-implicit-pointer-conversion.EnableInC
+    value: false
+
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.MemberCase
+    value: camelBack
+
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.ClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.EnumCase
+    value: CamelCase
+  - key: readability-identifier-naming.AbstractClassCase
+    value: CamelCase
+  - key: readability-identifier-naming.ConceptCase
+    value: CamelCase
+  - key: readability-identifier-naming.FunctionCase
+    value: CamelCase
+  - key: readability-identifier-naming.NamespaceCase
+    value: lower_case
+  - key: readability-identifier-naming.TypeAliasCase
+    value: CamelCase
+  - key: readability-identifier-naming.TemplateParameterCase
+    value: CamelCase
+  - key: readability-identifier-naming.MacroDefinitionCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.GlobalConstantCase
+    value: CamelCase
+
+  - key: readability-identifier-naming.FunctionIgnoredRegexp
+    value: '^(begin|end|cbegin|cend|rbegin|rend|crbegin|crend|size|empty|data|parse|format)$'
+  - key: readability-identifier-naming.TypeAliasIgnoredRegexp
+    value: '^(iterator_category|value_type|difference_type|pointer|reference|iterator_concept)$'
+  - key: readability-identifier-naming.GlobalConstantIgnoredRegexp
+    value: '^(enable_borrowed_range)$'
+
+  - key: readability-identifier-naming.AbstractClassPrefix
+    value: 'I'
+  - key: readability-identifier-naming.TypedefSuffix
+    value: '_t'
+  - key: readability-identifier-naming.PrivateMemberPrefix
+    value: 'm_'
+  - key: readability-identifier-naming.GlobalConstantPrefix
+    value: 'k'
+  - key: readability-identifier-naming.EnumConstantPrefix
+    value: 'e'
+  - key: readability-identifier-naming.GlobalVariablePrefix
+    value: 'g_'
+
+WarningsAsErrors: ''
+HeaderFilterRegex: 'skylabs/**/*.*'
+FormatStyle: file

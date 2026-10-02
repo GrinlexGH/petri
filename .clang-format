@@ -1,0 +1,31 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+
+# Imo 80 is too small
+ColumnLimit: 105
+
+# Indentation
+IndentWidth: 4
+AccessModifierOffset: -4
+
+# I don't want comments
+FixNamespaceComments: false
+
+# Brace style
+SpaceBeforeCpp11BracedList: true
+Cpp11BracedListStyle: false
+SpaceInEmptyBraces: Always
+
+# Include sorting
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex: '^<[Ww]indows\.h>'
+    Priority: 1
+  - Regex: '^<.*'
+    Priority: 2
+  - Regex: '^".*'
+    Priority: 3
+  - Regex: '.*'
+    Priority: 4
+...
