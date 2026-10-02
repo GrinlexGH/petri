@@ -10,7 +10,6 @@ project(Petri LANGUAGES CXX C)
 set(PETRI_ROOT_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 
 get_property(IS_MULTI_CONFIG GLOBAL PROPERTY GENERATOR_IS_MULTI_CONFIG)
-set(PETRI_INSTALL_SUBDIR $<$<BOOL:${IS_MULTI_CONFIG}>:$<CONFIG>/>)
 set(PETRI_BUILD_DIR ${CMAKE_BINARY_DIR}/built/$<$<BOOL:${IS_MULTI_CONFIG}>:$<CONFIG>/>)
 
 # CMake options
@@ -36,12 +35,6 @@ set(CMAKE_C_VISIBILITY_PRESET hidden)
 set(CMAKE_VISIBILITY_INLINES_HIDDEN ON)
 
 set(CMAKE_DEBUGGER_WORKING_DIRECTORY ${PETRI_ROOT_DIR})
-
-set(CMAKE_INSTALL_RPATH "\$ORIGIN/../lib")
-
-if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-    set_property(CACHE CMAKE_INSTALL_PREFIX PROPERTY VALUE "${CMAKE_BINARY_DIR}/.install")
-endif()
 
 set(IS_LANG_CCXX $<OR:$<COMPILE_LANGUAGE:CXX>,$<COMPILE_LANGUAGE:C>>)
 set(IS_GNU_LIKE $<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>,$<CXX_COMPILER_ID:AppleClang>>)
@@ -257,15 +250,15 @@ endfunction()
 #        PT_<TARGET>_PUBLIC_CLASS       export attribute
 #      (<TARGET> is the uppercased target name converted to a C identifier)
 #   4. On Windows for executables links comctl32 and adds win32.manifest
-#   5. Calls petri_target_setup_install() to configure output directories
+#   5. Calls petri_target_setup_artifacts() to configure output directories
 #      and post-build copies.
 #
 # Parameters:
 #   VS_STARTUP                  Set target as Visual Studio default startup project
-#   RUNTIME_DESTINATION         Subdirectory of install destination for runtime artifacts
-#   ARCHIVE_DESTINATION         Subdirectory of install destination for linking artifacts
-#   LIBRARY_DESTINATION         Subdirectory of install destination for library artifacts
-#   RUNTIME_PLUGINS             Additional targets for install as IMPORTED_RUNTIME_ARTIFACTS
+#   RUNTIME_DESTINATION         Subdirectory of build destination for runtime artifacts (default: bin)
+#   ARCHIVE_DESTINATION         Subdirectory of build destination for linking artifacts (default: lib)
+#   LIBRARY_DESTINATION         Subdirectory of build destination for library artifacts (default: lib)
+#   RUNTIME_PLUGINS             Additional targets to copy alongside <target> artifacts
 function(petri_configure_target target_name)
     set(options VS_STARTUP)
     set(oneValueArgs RUNTIME_DESTINATION ARCHIVE_DESTINATION LIBRARY_DESTINATION)
@@ -324,11 +317,11 @@ function(petri_configure_target target_name)
         list(APPEND function_args RUNTIME_PLUGINS ${ARG_RUNTIME_PLUGINS})
     endif()
 
-    petri_target_setup_install(${target_name} ${function_args})
+    petri_target_setup_artifacts(${target_name} ${function_args})
 endfunction()
 
 # Third party libraries
 find_package(fmt CONFIG REQUIRED)
 
 # Sources
-add_subdirectory(petri)
+add_subdirectory(src)
