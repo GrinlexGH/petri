@@ -1,10 +1,8 @@
 #include <cassert>
-#include <vector>
-
-#include <fmt/format.h>
 
 #include "sort.hpp"
 
+namespace {
 template <auto Func>
 void Test() {
     // 1. Уже отсортирован
@@ -64,6 +62,7 @@ void Test() {
         assert(a[3] == 3);
         assert(a[4] == 3);
     }
+}
 }
 
 int main() {

@@ -2,11 +2,12 @@
 
 #include "sort.hpp"
 
-void Merge(int* l, int* mid, int* r) {
+namespace {
+void Merge(int* l, const int* mid, const int* r) {
     const std::ptrdiff_t n = r - l;
     std::vector tmp(n, 0);
-    int* i = l;
-    int* j = mid;
+    const int* i = l;
+    const int* j = mid;
     int* k = tmp.data();
     while (i != mid && j != r) {
         if (*i <= *j) {  // Стабильность
@@ -31,10 +32,11 @@ void Merge(int* l, int* mid, int* r) {
         ++k;
     }
 
-    for (std::ptrdiff_t i = 0; i < n; ++i) {
-        *l = tmp[i];
+    for (std::ptrdiff_t q = 0; q < n; ++q) {
+        *l = tmp[q];
         ++l;
     }
+}
 }
 
 void MergeSort(int* l, int* r) {

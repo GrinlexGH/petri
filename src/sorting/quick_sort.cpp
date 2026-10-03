@@ -2,12 +2,13 @@
 
 #include "sort.hpp"
 
+namespace {
 // Разбиение Хоара
 int* Partition(int* l, int* r) {
-    static thread_local std::mt19937 randomGenerator { std::random_device { }() };
+    thread_local std::mt19937 randomGenerator { std::random_device { }() };
     std::uniform_int_distribution<std::mt19937::result_type> distribution(0, (r - l) - 1);
 
-    int pivot = *(l + distribution(randomGenerator));
+    const int pivot = *(l + distribution(randomGenerator));
     int* i = l;
     int* j = r - 1;
 
@@ -21,7 +22,7 @@ int* Partition(int* l, int* r) {
         }
 
         if (i <= j) {
-            int tmp = *i;
+            const int tmp = *i;
             *i = *j;
             *j = tmp;
 
@@ -31,6 +32,7 @@ int* Partition(int* l, int* r) {
     }
 
     return i;
+}
 }
 
 void QuickSort(int* l, int* r) {

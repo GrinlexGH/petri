@@ -7,7 +7,7 @@ void InsertionSort(int* l, int* r) {
 
     for (int* i = l; i < r - 1; ++i) {
         int* j = i + 1;
-        int tmp = *j;
+        const int tmp = *j;
         while (j > l && *(j - 1) > tmp) {  // Стабильность
             *j = *(j - 1);
             --j;
