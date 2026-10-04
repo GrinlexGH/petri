@@ -296,8 +296,8 @@ function(petri_configure_target target_name)
     endif ()
 
     if(WIN32 AND ("${target_type}" STREQUAL "EXECUTABLE"))
-        target_sources(${CURRENT_TARGET_NAME} PRIVATE ${PETRI_ROOT_DIR}/cmake/win32.manifest)
-        target_link_libraries(${CURRENT_TARGET_NAME} PRIVATE comctl32)
+        target_sources(${target_name} PRIVATE ${PETRI_ROOT_DIR}/cmake/win32.manifest)
+        target_link_libraries(${target_name} PRIVATE comctl32)
     endif()
 
     set(function_args "")
