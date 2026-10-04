@@ -2,7 +2,6 @@
 
 #include "sort.hpp"
 
-namespace {
 // Разбиение Хоара
 int* Partition(int* l, int* r) {
     thread_local std::mt19937 randomGenerator { std::random_device { }() };
@@ -33,14 +32,18 @@ int* Partition(int* l, int* r) {
 
     return i;
 }
-}
 
-void QuickSort(int* l, int* r) {
-    if (r - l <= 1) {
-        return;
+int QuickSelect(int* l, int* r, unsigned int nth) {
+    if (r - l == 1) {
+        return *l;
     }
 
     int* q = Partition(l, r);
-    QuickSort(l, q);
-    QuickSort(q, r);
+    // Элемент слева
+    if (nth < q - l) {
+        return QuickSelect(l, q, nth);
+    }
+
+    // Элемент справа
+    return QuickSelect(q, r, nth - (q - l));
 }
