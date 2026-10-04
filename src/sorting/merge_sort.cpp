@@ -3,9 +3,10 @@
 #include "sort.hpp"
 
 namespace {
-void Merge(int* l, const int* mid, const int* r) {
+long long Merge(int* l, const int* mid, const int* r) {
     const std::ptrdiff_t n = r - l;
     std::vector tmp(n, 0);
+    long long inv = 0;
     const int* i = l;
     const int* j = mid;
     int* k = tmp.data();
@@ -14,6 +15,7 @@ void Merge(int* l, const int* mid, const int* r) {
             *k = *i;
             ++i;
         } else {
+            inv += mid - i;
             *k = *j;
             ++j;
         }
@@ -36,15 +38,18 @@ void Merge(int* l, const int* mid, const int* r) {
         *l = tmp[q];
         ++l;
     }
+
+    return inv;
 }
 }
 
-void MergeSort(int* l, int* r) {
+long long MergeSort(int* l, int* r) {
     if (r - l <= 1) {
-        return;
+        return 0;
     }
 
-    MergeSort(l, l + (r - l) / 2);
-    MergeSort(l + (r - l) / 2, r);
-    Merge(l, l + (r - l) / 2, r);
+    long long inv = MergeSort(l, l + (r - l) / 2);
+    inv += MergeSort(l + (r - l) / 2, r);
+    inv += Merge(l, l + (r - l) / 2, r);
+    return inv;
 }

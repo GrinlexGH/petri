@@ -72,8 +72,11 @@ void InsertionSort(int* l, int* r);
  *
  * @param l Указатель на первый элемент диапазона.
  * @param r Указатель на элемент за последним.
+ *
+ * @return Количество инверсий исходного массива, то есть количество
+ *         пар (i, j), где i < j и A[i] > [j]
  */
-void MergeSort(int* l, int* r);
+long long MergeSort(int* l, int* r);
 
 /**
  * @brief Сортировка подсчётом (Counting Sort).
