@@ -1,75 +1,54 @@
+#include <algorithm>
 #include <cassert>
+#include <random>
+#include <vector>
 
 #include "sort.hpp"
 
-namespace {
-template <auto Func>
-void Test() {
-    // 1. Уже отсортирован
-    {
-        int a[] = { 1, 2, 3, 4, 5 };
-
-        Func(a, a + 5);
-
-        assert(a[0] == 1);
-        assert(a[1] == 2);
-        assert(a[2] == 3);
-        assert(a[3] == 4);
-        assert(a[4] == 5);
-    }
-
-    // 2. Обратный порядок
-    {
-        int a[] = { 5, 4, 3, 2, 1 };
-
-        Func(a, a + 5);
-
-        assert(a[0] == 1);
-        assert(a[1] == 2);
-        assert(a[2] == 3);
-        assert(a[3] == 4);
-        assert(a[4] == 5);
-    }
-
-    // 3. Один элемент
-    {
-        int a[] = { 42 };
-
-        Func(a, a + 1);
-
-        assert(a[0] == 42);
-    }
-
-    // 4. Два элемента, не отсортированы
-    {
-        int a[] = { 2, 1 };
-
-        Func(a, a + 2);
-
-        assert(a[0] == 1);
-        assert(a[1] == 2);
-    }
-
-    // 5. Повторяющиеся элементы
-    {
-        int a[] = { 3, 1, 2, 1, 3 };
-
-        Func(a, a + 5);
-
-        assert(a[0] == 1);
-        assert(a[1] == 1);
-        assert(a[2] == 2);
-        assert(a[3] == 3);
-        assert(a[4] == 3);
-    }
-}
-}
-
 int main() {
-    Test<QuickSort>();
-    Test<InsertionSort>();
-    Test<MergeSort>();
-    Test<CountingSort>();
-    Test<SelectionSort>();
-    Test<LSDRadixSort>();
+    std::vector<std::int32_t> arr { -3, -2, -1, 0, 0, 1, 2, 3 };
+    std::mt19937 generator { std::random_device { }() };
+    std::uniform_int_distribution<std::size_t> distribution(0, arr.size() - 1);
+
+    std::ranges::shuffle(arr, generator);
+    QuickSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+    QuickSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+
+    std::ranges::shuffle(arr, generator);
+    std::vector tmp = arr;
+    std::size_t idx = distribution(generator);
+    std::ranges::nth_element(tmp, tmp.begin() + static_cast<std::ptrdiff_t>(idx));
+    assert(QuickSelect(arr.data(), arr.data() + arr.size(), idx) == tmp[idx]);
+
+    arr = { 3, 2, 1, 0, 0, -1, -2, -3 };
+    assert(MergeSort(arr.data(), arr.data() + arr.size()) == 27);
+    assert(std::ranges::is_sorted(arr));
+    assert(MergeSort(arr.data(), arr.data() + arr.size()) == 0);
+    assert(std::ranges::is_sorted(arr));
+
+    std::ranges::shuffle(arr, generator);
+    CountingSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+    CountingSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+
+    std::ranges::shuffle(arr, generator);
+    LSDRadixSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+    LSDRadixSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+
+    std::ranges::shuffle(arr, generator);
+    InsertionSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+    InsertionSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+
+    std::ranges::shuffle(arr, generator);
+    SelectionSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
+    SelectionSort(arr.data(), arr.data() + arr.size());
+    assert(std::ranges::is_sorted(arr));
 }

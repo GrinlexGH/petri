@@ -2,15 +2,13 @@
 
 #include "sort.hpp"
 
-namespace {
-// Разбиение Хоара
-int* Partition(int* l, int* r) {
-    thread_local std::mt19937 randomGenerator { std::random_device { }() };
-    std::uniform_int_distribution<std::mt19937::result_type> distribution(0, (r - l) - 1);
+std::int32_t* Partition(std::int32_t* l, std::int32_t* r) {
+    static std::mt19937 generator { std::random_device { }() };
+    std::uniform_int_distribution<std::size_t> distribution(0, (r - l) - 1);
 
-    const int pivot = l[distribution(randomGenerator)];
-    int* i = l;
-    int* j = r - 1;
+    const std::int32_t pivot = l[distribution(generator)];
+    std::int32_t* i = l;
+    std::int32_t* j = r - 1;
 
     while (i <= j) {
         while (*i < pivot) {
@@ -22,7 +20,7 @@ int* Partition(int* l, int* r) {
         }
 
         if (i <= j) {
-            const int tmp = *i;
+            const std::int32_t tmp = *i;
             *i = *j;
             *j = tmp;
 
@@ -33,14 +31,13 @@ int* Partition(int* l, int* r) {
 
     return i;
 }
-}
 
-void QuickSort(int* l, int* r) {
+void QuickSort(std::int32_t* l, std::int32_t* r) {
     if (r - l <= 1) {
         return;
     }
 
-    int* q = Partition(l, r);
+    std::int32_t* q = Partition(l, r);
     QuickSort(l, q);
     QuickSort(q, r);
 }
