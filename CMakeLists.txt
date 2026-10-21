@@ -236,7 +236,7 @@ endfunction()
 #     [RUNTIME_PLUGINS <targets>...]
 # )
 #
-# One-stop setup for a Skylabs target. Call it once after the target is
+# One-stop setup for a target. Call it once after the target is
 # created and its sources are added.
 #
 # Behavior:
