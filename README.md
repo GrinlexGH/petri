@@ -2,11 +2,6 @@
 
 C++ sandbox for experiments.
 
-## Layout
-
-- `src/` – experiments, one folder each
-- `tools/` – helper scripts
-
 ## Usage
 
 ```sh

@@ -54,7 +54,6 @@ MAIN_TEMPLATE = """\
 
 int main() {
     fmt::println("Hello from @NAME@!");
-    return 0;
 }
 """
 
