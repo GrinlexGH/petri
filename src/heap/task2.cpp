@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 
-#include "tasks.hpp"
-
 namespace {
 void SiftDownMax(std::vector<std::int32_t>& arr, std::size_t size, std::size_t i) {
     while (true) {

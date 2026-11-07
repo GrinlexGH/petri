@@ -1,8 +1,6 @@
 #include <iostream>
 #include <vector>
 
-#include "tasks.hpp"
-
 namespace {
 void SiftDownMin(std::vector<std::int64_t>& arr, std::size_t i) {
     while (true) {
