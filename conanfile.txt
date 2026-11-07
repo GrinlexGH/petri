@@ -1,5 +1,11 @@
 [requires]
 fmt/[*]
+glm/[*]
+sdl/[*]
+vulkan-headers/[*]
+vk-bootstrap/[*]
+vulkan-memory-allocator/[*]
+vulkan-memory-allocator-hpp/[*]
 
 [generators]
 CMakeConfigDeps

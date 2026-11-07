@@ -322,6 +322,12 @@ endfunction()
 
 # Third party libraries
 find_package(fmt CONFIG REQUIRED)
+find_package(glm CONFIG REQUIRED)
+find_package(SDL3 CONFIG REQUIRED)
+find_package(vk-bootstrap CONFIG REQUIRED)
+find_package(VulkanHeaders CONFIG REQUIRED)
+find_package(VulkanMemoryAllocator CONFIG REQUIRED)
+find_package(VulkanMemoryAllocator-Hpp CONFIG REQUIRED)
 
 # Sources
 add_subdirectory(src)

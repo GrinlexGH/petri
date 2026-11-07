@@ -1,0 +1,3 @@
+[submodule "conan/conan-recipes"]
+	path = conan/conan-recipes
+	url = https://github.com/GrinlexGH/conan-recipes
