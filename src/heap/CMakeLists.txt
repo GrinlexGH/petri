@@ -1,26 +1,16 @@
 add_executable(heap)
 
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "*.h" "*.hpp")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.c" "*.cc" "*.cpp")
+target_sources(heap
+    PRIVATE
+    FILE_SET SOURCES FILES
+        main.cpp
+        task1.cpp
+        task2.cpp
+        task3.cpp
+        task4.cpp
+        task5.cpp
+)
 
-if(headers)
-    target_sources(heap
-        PRIVATE
-            FILE_SET HEADERS
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${headers}
-    )
-endif()
-
-if(sources)
-    target_sources(heap
-        PRIVATE
-            FILE_SET SOURCES
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${sources}
-    )
-endif()
-
-target_link_libraries(heap PRIVATE fmt::fmt)
+target_link_libraries(heap PRIVATE common)
 
 petri_configure_target(heap VS_STARTUP)

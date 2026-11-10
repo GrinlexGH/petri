@@ -23,28 +23,13 @@ NAME_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_-]*$")
 CMAKE_TEMPLATE = """\
 add_executable(@NAME@)
 
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "*.h" "*.hpp")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.c" "*.cc" "*.cpp")
+target_sources(@NAME@
+    PRIVATE
+    FILE_SET SOURCES FILES
+        main
+)
 
-if(headers)
-    target_sources(@NAME@
-        PRIVATE
-            FILE_SET HEADERS
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${headers}
-    )
-endif()
-
-if(sources)
-    target_sources(@NAME@
-        PRIVATE
-            FILE_SET SOURCES
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${sources}
-    )
-endif()
-
-target_link_libraries(@NAME@ PRIVATE fmt::fmt)
+target_link_libraries(@NAME@ PRIVATE common)
 
 petri_configure_target(@NAME@ VS_STARTUP)
 """

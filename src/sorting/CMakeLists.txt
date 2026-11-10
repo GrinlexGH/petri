@@ -1,26 +1,20 @@
 add_executable(sorting)
 
-file(GLOB_RECURSE headers CONFIGURE_DEPENDS "*.h" "*.hpp")
-file(GLOB_RECURSE sources CONFIGURE_DEPENDS "*.c" "*.cc" "*.cpp")
+target_sources(sorting
+    PRIVATE
+    FILE_SET HEADERS FILES
+        sort.hpp
+    FILE_SET SOURCES FILES
+        main.cpp
+        counting_sort.cpp
+        insertion_sort.cpp
+        merge_sort.cpp
+        quick_sort.cpp
+        radix_sort.cpp
+        selection_sort.cpp
+        quick_select.cpp
+)
 
-if(headers)
-    target_sources(sorting
-        PRIVATE
-            FILE_SET HEADERS
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${headers}
-    )
-endif()
-
-if(sources)
-    target_sources(sorting
-        PRIVATE
-            FILE_SET SOURCES
-            BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
-            FILES ${sources}
-    )
-endif()
-
-target_link_libraries(sorting PRIVATE fmt::fmt)
+target_link_libraries(sorting PRIVATE common)
 
 petri_configure_target(sorting VS_STARTUP)
