@@ -26,7 +26,7 @@ add_executable(@NAME@)
 target_sources(@NAME@
     PRIVATE
     FILE_SET SOURCES FILES
-        main
+        main.cpp
 )
 
 target_link_libraries(@NAME@ PRIVATE common)
