@@ -3,7 +3,9 @@ add_executable(dynamic_programming)
 target_sources(dynamic_programming
     PRIVATE
     FILE_SET SOURCES FILES
-        main
+        main.cpp
+        task5.cpp
+        task5s.cpp
 )
 
 target_link_libraries(dynamic_programming PRIVATE common)
