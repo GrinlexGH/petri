@@ -4,6 +4,8 @@ target_sources(dynamic_programming
     PRIVATE
     FILE_SET SOURCES FILES
         main.cpp
+        task1.cpp
+        task2.cpp
         task5.cpp
         task5s.cpp
 )
