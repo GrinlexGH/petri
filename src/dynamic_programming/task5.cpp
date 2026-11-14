@@ -86,5 +86,5 @@ void Task5() {
 
     int h = 0, w = 0;
     std::cin >> h >> w;
-    std::cout << SolveTriminoes(h, w);
+    std::cout << SolveTriminoes(static_cast<std::uint8_t>(h), static_cast<std::uint8_t>(w));
 }

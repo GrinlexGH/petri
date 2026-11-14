@@ -15,7 +15,7 @@ int* LowerBound(int* l, int* r, int x) {
     }
 }
 
-int main() {
+void Task4() {
     std::ios_base::sync_with_stdio(false);
     std::cin.tie(nullptr);
 

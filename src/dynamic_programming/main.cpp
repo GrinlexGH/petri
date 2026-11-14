@@ -5,4 +5,4 @@ void Task4();
 void Task5();
 void Task5s();
 
-// int main() { Task1(); }
+int main() { Task1(); }

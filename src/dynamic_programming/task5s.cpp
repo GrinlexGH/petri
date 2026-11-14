@@ -37,7 +37,7 @@ std::uint64_t SolveDominoes(std::uint8_t height, std::uint8_t width) {
         std::swap(height, width);
     }
 
-    std::vector<std::vector<std::uint64_t>> trans(1ull <<  height);
+    std::vector<std::vector<std::uint64_t>> trans(1ull << height);
     for (std::uint64_t mask = 0; mask < (1ull << height); mask++) {
         trans[mask] = FindAllMasks(height, mask);
     }
@@ -82,5 +82,5 @@ void Task5s() {
 
     int h = 0, w = 0;
     std::cin >> h >> w;
-    std::cout << SolveDominoes(h, w);
+    std::cout << SolveDominoes(static_cast<std::uint8_t>(h), static_cast<std::uint8_t>(w));
 }
